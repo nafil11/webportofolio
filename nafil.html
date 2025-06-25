@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Creative Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --secondary: #d85757;
+            --dark: #5987ab;
+            --light: #58595d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            min-height: 100vh;
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(232, 229, 229, 0.1), 0 10px 10px -5px rgba(253, 253, 253, 0.04);
+        }
+        
+        .skill-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-input {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold gradient-text">Portfolio</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">About</a>
+                    <a href="#skills" class="nav-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 rounded-md focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 shadow-lg rounded-b-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+                <div class="block px-3 py-2">
+                    <button id="theme-toggle-mobile" class="flex items-center p-2 rounded-full focus:outline-none">
+                        <i class="fas fa-moon dark:hidden mr-2"></i>
+                        <i class="fas fa-sun hidden dark:block mr-2"></i>
+                        <span class="dark:hidden">dark Mode</span>
+                        <span class="hidden dark:block">Light Mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text">MOCHAMMAD NAFIL RIZKULLAH</span></h1>
+                    <h2 class="text-2xl md:text-3xl mb-6 typewriter">SISTEM INFORMASI</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">saya membangaun pangalaman digital luar biasa cepat, mudah diakses, dan menaarik secara visual.</p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#projects" class="px-6 py-3 gradient-bg text-white rounded-full font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">View My Work</a>
+                        <a href="#contact" class="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">Contact Me</a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl floating">
+                        <img src="profil.jpg" alt="foto profil" class="profile-img"/>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold gradient-text mb-4">About Me</h2>
+                <div class="w-20 h-1 gradient-bg mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="w-full h-80 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="About" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 gradient-bg w-24 h-24 rounded-full flex items-center justify-center text-white text-4xl shadow-lg">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Who am I?</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Saya adalah mahasiswa Sistem Informasi yang bersemangat, saya tertarik pada bagaimana teknologi dapat menyelesaikan masalah bisnis. Saya menguasai pengembangan perangkat lunak, manajemen basis data, dan analisis sistem.</p>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">My Hobby</h4>
+                        <p class="text-gray-600 dark:text-gray-400">Bermain Game (Analitis/Strategi): Hobi saya bermain game, terutama yang berjenis strategi atau puzzle, melatih kemampuan saya dalam pemecahan masalah, berpikir logis, dan membuat keputusan cepat di bawah tekanan.</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="gradient-bg w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+<!--                                 <p class="font-semibold">5+ Years</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Experience</p> -->
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="gradient-bg w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div>
+<!--                                 <p class="font-semibold">50+ Projects</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Completed</p> -->
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="gradient-bg w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+<!--                                 <p class="font-semibold">30+ Clients</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Worldwide</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold gradient-text mb-4">My Skills</h2>
+                <div class="w-20 h-1 gradient-bg mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="skill-item p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">HTML</h3>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="gradient-bg h-2.5 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">CSS</h3>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="gradient-bg h-2.5 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-item p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">JavaScript</h3>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="gradient-bg h-2.5 rounded-full" style="width: 30%"></div>
+                    </div>
+                </div>
+                
+<!--                 <div class="skill-item p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                        <i class="fab fa-react"></i>
+                    </div> -->
+               <!--      <h3 class="text-xl font-semibold text-center mb-2">React</h3>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="gradient-bg h-2.5 rounded-full" style="width: 80%"></div>
+                    </div> -->
+<!--                 </div>
+                
+                <div class="skill-item p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                        <i class="fab fa-node-js"></i>
+                    </div> -->
+                   <!--  <h3 class="text-xl font-semibold text-center mb-2">Node.js</h3>
+                    <div class="w-full bg-gray-200 dark:bg-gray- -->
